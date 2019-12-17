@@ -1,4 +1,9 @@
-import { createGlobalStyle } from 'styled-components';
+/*
+ * @Descripttion: 
+ * @Author: zhaokh
+ * @Date: 2019-10-04 16:34:55
+ */
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
@@ -24,6 +29,7 @@ time, mark, audio, video {
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
+	font-family: -apple-system,SF UI Text,Arial,PingFang SC,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei,sans-serif;
 }
 body {
 	line-height: 1;

@@ -33,11 +33,11 @@ export const Nav = styled.nav`
     }
 `
 
-export const NavItem = styled.a`
+export const NavItem = styled.span`
     color:#333;
     cursor:pointer;
     font-size:17px;
-    line-height:58px
+    line-height:58px;
     padding:0 15px;
     box-sizing:border-box;
     &.left{

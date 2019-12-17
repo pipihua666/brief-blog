@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { CSSTransition } from "react-transition-group";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   Header,
   Logo,
@@ -17,6 +18,7 @@ import {
 } from "./style";
 
 import { actionCreator } from "./store";
+import UserInfo from "../UserInfo";
 
 class HeaderComponent extends Component {
   showSearchInfo() {
@@ -89,6 +91,7 @@ class HeaderComponent extends Component {
       handleInputFocus,
       handleInputBlur,
       list,
+      isLogin,
       searchValue,
       handleUpdownMouseEnter,
       handleUpdownMouseLeave,
@@ -111,7 +114,11 @@ class HeaderComponent extends Component {
             <i className="iconfont iconshoujixiazai"></i>
             下载App
           </NavItem>
-          <NavItem className="right">登陆</NavItem>
+          {!isLogin ? (
+            <Link to="/login">
+              <NavItem className="right">登录</NavItem>
+            </Link>
+          ) : null}
           <NavItem className="right">
             <i className="iconfont iconAa"></i>
           </NavItem>
@@ -143,17 +150,23 @@ class HeaderComponent extends Component {
           </Search>
         </Nav>
         <Addition>
-          <Button
-            className={registerMouseEnter ? "signUp signUpEnter" : "signUp"}
-            onMouseEnter={handleSignMouseEnter}
-            onMouseLeave={handleSignMouseLeave}
-          >
-            注册
-          </Button>
-          <Button className="writing">
-            <i className="iconfont iconbi"></i>
-            写文章
-          </Button>
+          {!isLogin ? (
+            <Button
+              className={registerMouseEnter ? "signUp signUpEnter" : "signUp"}
+              onMouseEnter={handleSignMouseEnter}
+              onMouseLeave={handleSignMouseLeave}
+            >
+              注册
+            </Button>
+          ) : (
+            <UserInfo />
+          )}
+          <Link to="/write">
+            <Button className="writing">
+              <i className="iconfont iconbi"></i>
+              写文章
+            </Button>
+          </Link>
         </Addition>
       </Header>
     );
@@ -170,7 +183,8 @@ const mapStateToProps = state => {
     updownMouseEnter: state.getIn(["header", "updownMouseEnter"]),
     registerMouseEnter: state.getIn(["header", "registerMouseEnter"]),
     titleMouseEnter: state.getIn(["header", "titleMouseEnter"]),
-    searchValue: state.getIn(["header", "searchValue"])
+    searchValue: state.getIn(["header", "searchValue"]),
+    isLogin: state.getIn(["login", "isLogin"])
   };
 };
 
@@ -229,7 +243,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(HeaderComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderComponent);
