@@ -14,7 +14,6 @@ const changeDetail = (title, content) => ({
   }
 });
 export const getDeatil = id => {
-  console.log(id);
   return async dispatch => {
     const { data = {} } = await axios.get("/api/detail.json?id=" + id);
     const {
